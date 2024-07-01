@@ -40,10 +40,10 @@ const LoginPage = () => {
 				</TextWrap>
 				<ImageContainer>
 					<Image
-						style={{ maxWidth: "38.438rem" }}
+						style={{ maxWidth: "32.188rem" }}
 						src={"/images/coffe-shop-login-page.webp"}
-						width={615}
-						height={615}
+						width={515}
+						height={515}
 						priority
 						sizes='100vw'
 						layout='responsive'

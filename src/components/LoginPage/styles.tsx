@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const MainContainer = styled.div`
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	height: 100vh;
 	background-color: var(--main-green);
 	@media (min-width: 1200px) {
@@ -36,7 +35,7 @@ export const LeftSideContainer = styled.div`
 		display: block;
 		background-color: var(--main-green);
 		color: var(--white);
-		height: 100vh;
+		min-height: 100vh;
 		width: 60vw;
 	}
 `;
@@ -50,7 +49,7 @@ export const RightSideContainer = styled.div`
 	@media (min-width: 1200px) {
 		background-color: var(--main-white);
 		width: 40vw;
-		height: 100vh;
+		height: auto;
 	}
 `;
 
@@ -58,8 +57,7 @@ export const ImageContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	max-width: 100%;
-	height: auto;
+	width: 100%;
 `;
 
 export const FormLogin = styled.form`
