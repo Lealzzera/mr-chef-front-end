@@ -20,13 +20,16 @@ import {
 import Image from "next/image";
 import InputFieldComponent from "../InputFieldComponent/InputFieldComponent";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
 	const [inputEmailValue, setInputEmailValue] = useState("");
 	const [inputPasswordValue, setInputPasswordValue] = useState("");
+	const route = useRouter();
 
 	const preventForm = (event: SyntheticEvent) => {
 		event.preventDefault();
+		route.push("/home");
 	};
 
 	return (
@@ -73,7 +76,11 @@ const LoginPage = () => {
 							value={inputPasswordValue}
 							changeValue={setInputPasswordValue}
 						/>
-						<ButtonComponent fullWidth={true} textButton='Entrar' />
+						<ButtonComponent
+							type='submit'
+							fullWidth={true}
+							textButton='Entrar'
+						/>
 					</FormLogin>
 					<ContainerInfo>
 						<ForgotPasswordLink>Esqueci minha senha</ForgotPasswordLink>
