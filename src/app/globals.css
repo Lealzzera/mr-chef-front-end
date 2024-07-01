@@ -7,7 +7,8 @@
   --light-green: #00BA61;
   --white: #FFF;
   --main-white: #E5E7EB;
-  --pinto: var(--main-font-mono)
+  --black-text-color: #090922;
+  --blue-link-color: #0037c5;
 }
 
 html, body {
