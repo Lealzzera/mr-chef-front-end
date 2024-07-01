@@ -1,13 +1,13 @@
-import { Button } from "@mui/material";
+import { Button, ButtonProps } from "@mui/material";
 import React from "react";
 import { ButtonContainer } from "./styles";
 
-type ButtonComponentProps = {
+interface ButtonComponentInterface extends ButtonProps {
 	textButton: string;
 	variant?: "contained" | "outlined" | "text";
 	fullWidth?: boolean;
 	onClick?: () => void;
-};
+}
 
 const ButtonComponent = ({
 	textButton,
@@ -15,7 +15,7 @@ const ButtonComponent = ({
 	fullWidth,
 	onClick,
 	...props
-}: ButtonComponentProps) => {
+}: ButtonComponentInterface) => {
 	return (
 		<ButtonContainer>
 			<Button
