@@ -7,9 +7,9 @@ const MenuMobileIcon = () => {
 			fill='none'
 			xmlns='http://www.w3.org/2000/svg'
 		>
-			<rect width='17' height='2' rx='1' fill='var(--main-green)' />
-			<rect y='5' width='17' height='2' rx='1' fill='var(--main-green)' />
-			<rect y='10' width='17' height='2' rx='1' fill='var(--main-green)' />
+			<rect width='17' height='2' rx='1' fill='var(--dark-green)' />
+			<rect y='5' width='17' height='2' rx='1' fill='var(--dark-green)' />
+			<rect y='10' width='17' height='2' rx='1' fill='var(--dark-green)' />
 		</svg>
 	);
 };
