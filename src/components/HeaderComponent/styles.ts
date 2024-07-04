@@ -18,10 +18,10 @@ export const HeaderContent = styled.div``;
 export const MenuMobileButton = styled.button`
 	background: none;
 	border: none;
-	transform: rotate(-180deg);
-	transition: transform 0.5s ease;
+	transform: rotate(0deg);
+	transition: transform 0.7s ease;
 	&.active {
 		transform: rotate(180deg);
-		transition: transform 0.5s ease;
+		transition: transform 0.7s ease;
 	}
 `;
