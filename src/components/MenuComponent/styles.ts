@@ -67,7 +67,7 @@ export const MenuDesktop = styled.nav`
 	& .MuiList-root {
 		box-shadow: rgba(0, 1, 1, 0.6) 1px 1px 2px;
 		background: var(--main-green);
-		width: 14.625;
+		width: 14.625rem;
 		padding-top: 0rem;
 		height: calc(100vh - 4.375rem);
 		overflow-y: scroll;

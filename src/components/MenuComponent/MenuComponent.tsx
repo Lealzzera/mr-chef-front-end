@@ -86,6 +86,7 @@ const MenuComponent = ({
 					</List>
 				</MenuMobileContainer>
 			)}
+			{/* TODO: SET OPTIONS ICONS AND ADJUST BUTTON STYLE WHEN CLICK ON IT */}
 			{desktopScreen && (
 				<MenuDesktop>
 					<List>
