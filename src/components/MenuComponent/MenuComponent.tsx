@@ -1,61 +1,41 @@
 "use client";
-import { List, ListItemButton, ListItemText } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useRouter } from "next/navigation";
-import { MenuDesktop, MenuMobileContainer } from "./styles";
+import useCheckDesktopScreen from "@/hooks/useCheckDesktopScreen";
+import { MenuMobileComponent } from "./components/MenuMobileComponent/MenuMobileComponent";
+import { menuList } from "@/mocks/menu";
+import { MenuDesktopComponent } from "./components/MenuDesktopComponent/MenuDesktopComponent";
+import { MenuContainer } from "./styles";
 
 type MenuComponentProps = {
 	openMobileMenu?: boolean;
 	handleMobileMenu: (value: boolean) => void;
 };
 
-//TODO: REMOVE THIS MOCK
-const menuList = [
-	{ id: 1, text: "Pedidos", icon: "", routeUrl: "/pedidos" },
-	{
-		id: 2,
-		text: "Histórico de pedidos",
-		icon: "",
-		routeUrl: "/historico",
-	},
-	{ id: 3, text: "Cardápio", icon: "", routeUrl: "/cardapio" },
-	{ id: 4, text: "Entregadores", icon: "", routeUrl: "/entregadores" },
-	{ id: 5, text: "Meu Desempenho", icon: "", routeUrl: "/desempenho" },
-	{ id: 6, text: "Minha Conta", icon: "", routeUrl: "/conta" },
-	{ id: 7, text: "Sugestões", icon: "", routeUrl: "/sugestoes" },
-	{ id: 8, text: "Promoções", icon: "", routeUrl: "/promocoes" },
-	{ id: 9, text: "Mesas", icon: "", routeUrl: "/mesas" },
-	{ id: 10, text: "Garçons", icon: "", routeUrl: "/garcons" },
-	{ id: 11, text: "Avaliações", icon: "", routeUrl: "/avaliacoes" },
-	{ id: 12, text: "Cupons", icon: "", routeUrl: "/cupons" },
-	{ id: 13, text: "Planos", icon: "", routeUrl: "/planos" },
-];
-
 const MenuComponent = ({
 	openMobileMenu,
 	handleMobileMenu,
 }: MenuComponentProps) => {
-	const [desktopScreen, setDesktopScreen] = useState(false);
 	const router = useRouter();
-	const menuMobileRef = useRef(null);
+	const menuMobileRef = useRef<HTMLDivElement | null>(null);
+	const buttonsList = useRef<HTMLUListElement>(null);
+	const desktopScreen = useCheckDesktopScreen();
 
-	useEffect(() => {
-		//TODO: FIGURE OUT A WAY TO EXTRACT THIS "checkScreenSize" FUNCTION TO A HELPER OR UTIL FILE
+	const activeButtonStyle = (index: number) => {
+		if (buttonsList.current) {
+			const arrayButtonItens = Array.from(buttonsList.current.children);
+			arrayButtonItens.forEach((buttonItem) => {
+				buttonItem.classList.remove("active");
+			});
+			arrayButtonItens[index].classList.add("active");
+		}
+	};
 
-		const checkScreenSize = () => {
-			if (window.innerWidth >= 1200) {
-				setDesktopScreen(true);
-			} else {
-				setDesktopScreen(false);
-			}
-		};
-		checkScreenSize();
-		return () => {
-			window.addEventListener("resize", checkScreenSize);
-		};
-	}, []);
-
-	const handlePushToRespectivePageButton = (pageRouter: string) => {
+	const handlePushToRespectivePageButton = (
+		pageRouter: string,
+		indexButton: number
+	) => {
+		activeButtonStyle(indexButton);
 		handleMobileMenu(!openMobileMenu);
 		router.push(pageRouter);
 	};
@@ -67,41 +47,25 @@ const MenuComponent = ({
 	};
 
 	return (
-		<>
+		<MenuContainer>
 			{!desktopScreen && (
-				<MenuMobileContainer
-					ref={menuMobileRef}
-					onClick={(event) => handleCloseMobileMenu(event.target)}
-					className={openMobileMenu ? "openMenu" : ""}
-				>
-					<List>
-						{menuList.map((item) => (
-							<ListItemButton
-								onClick={() => handlePushToRespectivePageButton(item.routeUrl)}
-								key={item.id}
-							>
-								<ListItemText>{item.text}</ListItemText>
-							</ListItemButton>
-						))}
-					</List>
-				</MenuMobileContainer>
+				<MenuMobileComponent
+					menuList={menuList}
+					openMobileMenu={openMobileMenu}
+					handleCloseMobileMenu={handleCloseMobileMenu}
+					handlePushToRespectivePageButton={handlePushToRespectivePageButton}
+					menuMobileRef={menuMobileRef}
+					buttonsList={buttonsList}
+				/>
 			)}
-			{/* TODO: SET OPTIONS ICONS AND ADJUST BUTTON STYLE WHEN CLICK ON IT */}
 			{desktopScreen && (
-				<MenuDesktop>
-					<List>
-						{menuList.map((item) => (
-							<ListItemButton
-								onClick={() => handlePushToRespectivePageButton(item.routeUrl)}
-								key={item.id}
-							>
-								<ListItemText>{item.text}</ListItemText>
-							</ListItemButton>
-						))}
-					</List>
-				</MenuDesktop>
+				<MenuDesktopComponent
+					buttonsList={buttonsList}
+					menuList={menuList}
+					handlePushToRespectivePageButton={handlePushToRespectivePageButton}
+				/>
 			)}
-		</>
+		</MenuContainer>
 	);
 };
 
