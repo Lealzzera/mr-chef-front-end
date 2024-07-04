@@ -29,7 +29,7 @@ const LoginPage = () => {
 
 	const preventForm = (event: SyntheticEvent) => {
 		event.preventDefault();
-		route.push("/home");
+		route.push("/pedidos");
 	};
 
 	return (

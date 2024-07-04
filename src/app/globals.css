@@ -5,8 +5,11 @@
 :root {
   --main-green: #006A37;
   --light-green: #00BA61;
+  --medium-green: #005029;
+  --dark-green: #00371D;
   --white: #FFF;
   --main-white: #E5E7EB;
+  --white-2: #EAEAEA;
   --black-text-color: #090922;
   --blue-link-color: #0037c5;
 }
@@ -14,6 +17,10 @@
 html, body {
   margin: 0;
   padding: 0;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 html {
@@ -42,8 +49,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, div, nav {
   margin: 0px;
 }
 
-/* img {
-  display: block;
+.layout-pages-container {
+  padding-top: 4.375rem;
+  background-color: var(--main-white);
   width: 100%;
-  height: auto;
-} */
+}

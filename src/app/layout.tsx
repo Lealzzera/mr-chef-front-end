@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { main_font_mono, main_font_sans, second_font } from "./functions/fonts";
 import StyledComponentsRegistry from "./lib/registry";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "Mr. Chef",
