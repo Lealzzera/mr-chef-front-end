@@ -54,3 +54,11 @@ h1, h2, h3, h4, h5, h6, p, span, a, div, nav {
   background-color: var(--main-white);
   width: 100%;
 }
+
+svg.stroked-svg {
+  stroke: var(--dark-green);
+}
+
+svg.filled-svg {
+  fill: var(--dark-green);
+}

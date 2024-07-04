@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { HeaderContainer, HeaderContent, MenuMobileButton } from "./styles";
 import MenuMobileIcon from "@/icons/MenuMobileIcon";
+import useCheckDesktopScreen from "@/hooks/useCheckDesktopScreen";
 
 type HeaderContainerProps = {
 	valueMobileMenu: boolean;
@@ -13,21 +14,8 @@ export default function HeaderComponent({
 	valueMobileMenu,
 	onClickOpenButton,
 }: HeaderContainerProps) {
-	const [desktopScreen, setDesktopScreen] = useState(false);
-	useEffect(() => {
-		//TODO: FIGURE OUT A WAY TO EXTRACT THIS "checkScreenSize" FUNCTION TO A HELPER OR UTIL FILE
-		const checkScreenSize = () => {
-			if (window.innerWidth >= 1200) {
-				setDesktopScreen(true);
-			} else {
-				setDesktopScreen(false);
-			}
-		};
-		checkScreenSize();
-		return () => {
-			window.addEventListener("resize", checkScreenSize);
-		};
-	}, []);
+	const desktopScreen = useCheckDesktopScreen();
+
 	return (
 		<HeaderContainer>
 			<HeaderContent>Hello John Doe</HeaderContent>
