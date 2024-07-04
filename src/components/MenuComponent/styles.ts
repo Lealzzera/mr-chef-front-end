@@ -73,7 +73,6 @@ export const MenuDesktop = styled.nav`
 		overflow-y: scroll;
 	}
 
-	/* TODO: REMOVE THIS DISPLAY NONE AND CUSTOMIZE THIS WITH THE MOST SUBTLE STYLE */
 	& .MuiList-root::-webkit-scrollbar {
 		display: none;
 	}
