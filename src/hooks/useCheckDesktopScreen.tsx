@@ -1,7 +1,8 @@
+"use client";
 import { useEffect, useState } from "react";
 
 const useCheckDesktopScreen = () => {
-	const [desktopScreen, setDesktopScreen] = useState(false);
+	const [desktopScreen, setDesktopScreen] = useState<boolean | null>(null);
 
 	useEffect(() => {
 		const checkScreenSize = () => {
