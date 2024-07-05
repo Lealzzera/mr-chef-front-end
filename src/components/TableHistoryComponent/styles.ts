@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const TableWrap = styled.div`
-	padding-bottom: 900px;
-
 	& .MuiTableContainer-root {
 		height: calc(100vh - 200px);
 
