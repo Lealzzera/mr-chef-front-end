@@ -12,6 +12,8 @@
   --white-2: #EAEAEA;
   --black-text-color: #090922;
   --blue-link-color: #0037c5;
+  --main-red: #E10036;
+  --main-yellow: #E3B100;
 }
 
 html, body {
@@ -20,6 +22,11 @@ html, body {
 }
 
 .overflow-hidden {
+  overflow: hidden;
+}
+
+/* //TODO: REMOVE IT IN FUTURE */
+body {
   overflow: hidden;
 }
 
@@ -49,9 +56,17 @@ h1, h2, h3, h4, h5, h6, p, span, a, div, nav {
   margin: 0px;
 }
 
+
+.main-page-title {
+  color: var(--black-text-color);
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
 .layout-pages-container {
   padding-top: 4.375rem;
   background-color: var(--main-white);
+  min-height: 100vh;
   width: 100%;
 }
 
