@@ -13,6 +13,7 @@ export const MainContainer = styled.div`
 
 export const LoginTitle = styled.h1`
 	font-size: 2.25rem;
+	color: var(--main-white);
 `;
 
 export const LoginDescription = styled.h2`
