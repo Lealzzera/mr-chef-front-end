@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const MenuMobileContainer = styled.nav`
 	background: rgba(0, 0, 0, 0.6);
-	position: absolute;
-	width: 100%;
+	width: 100vw;
 	display: none;
 
 	&.openMenu {

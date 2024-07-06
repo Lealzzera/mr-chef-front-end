@@ -2,6 +2,8 @@ import { MutableRefObject } from "react";
 import { MenuMobileContainer } from "./styles";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import { MenuInterface } from "@/types/Menu.interface";
+import useWindowLocation from "@/hooks/useWindowLocation";
+import { MenuListInterface } from "@/types/MenuList.interface";
 
 interface MenuMobileComponentProps extends MenuInterface {
 	menuMobileRef: MutableRefObject<HTMLDivElement | null>;
@@ -17,6 +19,8 @@ export function MenuMobileComponent({
 	handleCloseMobileMenu,
 	handlePushToRespectivePageButton,
 }: MenuMobileComponentProps) {
+	const location = useWindowLocation();
+
 	return (
 		<MenuMobileContainer
 			ref={menuMobileRef}
@@ -24,9 +28,9 @@ export function MenuMobileComponent({
 			className={openMobileMenu ? "openMenu" : ""}
 		>
 			<List ref={buttonsList}>
-				{menuList.map((item: any, indexButton: number) => (
+				{menuList.map((item: MenuListInterface, indexButton: number) => (
 					<ListItemButton
-						className={indexButton === 0 ? "active" : ""}
+						className={item.routeUrl === location ? "active" : ""}
 						onClick={() =>
 							handlePushToRespectivePageButton(item.routeUrl, indexButton)
 						}
