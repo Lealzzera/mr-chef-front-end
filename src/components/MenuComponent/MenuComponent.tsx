@@ -40,7 +40,7 @@ const MenuComponent = ({
 		router.push(pageRouter);
 	};
 
-	const handleCloseMobileMenu = (targetValue: any) => {
+	const handleCloseMobileMenu = (targetValue: EventTarget) => {
 		return targetValue === menuMobileRef.current
 			? handleMobileMenu(false)
 			: null;

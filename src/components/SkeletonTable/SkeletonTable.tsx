@@ -7,7 +7,7 @@ type SkeletonTableProps = {
 };
 
 export default function SkeletonTable({ skeletonSize }: SkeletonTableProps) {
-	const skeletonRows: any = [];
+	const skeletonRows: React.JSX.Element[] = [];
 
 	for (let i = 0; i < skeletonSize; i++) {
 		skeletonRows.push(
