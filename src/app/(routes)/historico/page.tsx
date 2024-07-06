@@ -44,6 +44,11 @@ const HistoryPage = () => {
 			{!loading && desktopScreen && desktopScreen !== null && (
 				<DesktopTableComponent options={options} historyData={historyData} />
 			)}
+			{loading && !desktopScreen && desktopScreen !== null && (
+				<MobileCardContainer>
+					<SkeletonTable variant='rectangular' skeletonSize={30} />
+				</MobileCardContainer>
+			)}
 			{!loading && !desktopScreen && desktopScreen !== null && (
 				<MobileCardContainer>
 					<MobileCardInfoComponent options={options} cardData={historyData} />
