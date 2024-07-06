@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const MenuContainer = styled.div`
 	padding-top: 4.375rem;
+	position: fixed;
+	z-index: 99;
 
 	& .MuiList-root {
 		background: var(--main-green);

@@ -1,40 +1,35 @@
-import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { OrderHistoryData } from "@/types/OrderHistoryData.interface";
 import { TableWrap } from "./styles";
 import ChipComponent from "../ChipComponent/ChipComponent";
-import { Chip } from "@mui/material";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 
 type TableHistoryComponentProps = {
 	data: OrderHistoryData[];
+	options: string[];
 };
 
 export default function TableHistoryComponent({
 	data,
+	options,
 }: TableHistoryComponentProps) {
 	return (
 		<TableWrap>
 			<TableContainer>
-				<Table sx={{ minWidth: 650 }} aria-label='simple table'>
+				<Table
+					sx={{ minWidth: 650 }}
+					aria-label='Tabela com as informações do histórico de pedidos do restaurante'
+				>
 					<TableHead>
 						<TableRow>
-							<TableCell>Pedido</TableCell>
-							<TableCell>Data</TableCell>
-							<TableCell>Mesa</TableCell>
-							<TableCell>Cliente</TableCell>
-							<TableCell>Tipo</TableCell>
-							<TableCell>Pagamento</TableCell>
-							<TableCell>Garçom</TableCell>
-							<TableCell>Status</TableCell>
-							<TableCell>Valor</TableCell>
-							<TableCell>Ações</TableCell>
+							{options.map((option, index) => (
+								<TableCell key={index}>{option}</TableCell>
+							))}
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -51,10 +46,7 @@ export default function TableHistoryComponent({
 								status,
 								price,
 							}) => (
-								<TableRow
-									key={id}
-									sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-								>
+								<TableRow key={id}>
 									<TableCell>{order}</TableCell>
 									<TableCell>{date}</TableCell>
 									<TableCell>{table}</TableCell>
@@ -67,7 +59,10 @@ export default function TableHistoryComponent({
 									</TableCell>
 									<TableCell>{price}</TableCell>
 									<TableCell>
-										<ButtonComponent textButton='Imprimir' />
+										<ButtonComponent
+											onClick={() => alert("printed")}
+											textButton='Imprimir'
+										/>
 									</TableCell>
 								</TableRow>
 							)

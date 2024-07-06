@@ -3,9 +3,7 @@ import React from "react";
 import { OrdersContainer } from "./styles";
 
 const OrdersPage = () => {
-	return (
-		<OrdersContainer className='main-container'>Orders Page...</OrdersContainer>
-	);
+	return <OrdersContainer className='main-container'></OrdersContainer>;
 };
 
 export default OrdersPage;
