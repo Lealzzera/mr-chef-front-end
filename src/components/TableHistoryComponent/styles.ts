@@ -1,24 +1,24 @@
 import styled from "styled-components";
 
 export const TableWrap = styled.div`
-	padding-bottom: 900px;
-
 	& .MuiTableContainer-root {
-		height: calc(100vh - 200px);
-
+		height: calc(100vh - 12.5rem);
 		background-color: transparent;
+
 		& .MuiTable-root {
 		}
+
 		& .MuiTableHead-root {
 			& .MuiTableCell-root {
 				color: var(--black-text-color);
-
 				font-size: 1rem;
 				font-weight: bold;
 			}
 		}
+
 		& .MuiTableBody-root {
 			overflow-y: scroll;
+
 			& .MuiTableCell-root {
 				cursor: pointer;
 				font-family: var(--second-font);

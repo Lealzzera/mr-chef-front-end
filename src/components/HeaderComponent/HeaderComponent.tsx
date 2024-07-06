@@ -19,7 +19,7 @@ export default function HeaderComponent({
 	return (
 		<HeaderContainer>
 			<HeaderContent>Hello John Doe</HeaderContent>
-			{!desktopScreen && (
+			{!desktopScreen && desktopScreen !== null && (
 				<MenuMobileButton
 					className={valueMobileMenu ? "active" : ""}
 					onClick={() => onClickOpenButton(!valueMobileMenu)}

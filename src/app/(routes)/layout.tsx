@@ -3,6 +3,7 @@
 import HeaderComponent from "@/components/HeaderComponent/HeaderComponent";
 import MenuComponent from "@/components/MenuComponent/MenuComponent";
 import { useState } from "react";
+import { LayoutContentContainer, MainContentLayout } from "./styles";
 
 export default function RoutesLayout({
 	children,
@@ -21,18 +22,18 @@ export default function RoutesLayout({
 		}
 	};
 	return (
-		<main>
+		<MainContentLayout>
 			<HeaderComponent
 				valueMobileMenu={openMobileMenu}
 				onClickOpenButton={handleToogleMobileMenu}
 			/>
-			<div style={{ display: "flex", position: "relative" }}>
+			<LayoutContentContainer>
 				<MenuComponent
 					handleMobileMenu={handleToogleMobileMenu}
 					openMobileMenu={openMobileMenu}
 				/>
 				<div className='layout-pages-container'>{children}</div>
-			</div>
-		</main>
+			</LayoutContentContainer>
+		</MainContentLayout>
 	);
 }
