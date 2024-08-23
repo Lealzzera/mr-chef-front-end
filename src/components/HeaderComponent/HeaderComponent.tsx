@@ -1,32 +1,27 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { HeaderContainer, HeaderContent, MenuMobileButton } from "./styles";
 import MenuMobileIcon from "@/icons/MenuMobileIcon";
-import useCheckDesktopScreen from "@/hooks/useCheckDesktopScreen";
 
 type HeaderContainerProps = {
-	valueMobileMenu: boolean;
-	onClickOpenButton: (value: boolean) => void;
+  valueMobileMenu: boolean;
+  onClickOpenButton: (value: boolean) => void;
 };
 
 export default function HeaderComponent({
-	valueMobileMenu,
-	onClickOpenButton,
+  valueMobileMenu,
+  onClickOpenButton,
 }: HeaderContainerProps) {
-	const desktopScreen = useCheckDesktopScreen();
-
-	return (
-		<HeaderContainer>
-			<HeaderContent>Hello John Doe</HeaderContent>
-			{!desktopScreen && desktopScreen !== null && (
-				<MenuMobileButton
-					className={valueMobileMenu ? "active" : ""}
-					onClick={() => onClickOpenButton(!valueMobileMenu)}
-				>
-					<MenuMobileIcon />
-				</MenuMobileButton>
-			)}
-		</HeaderContainer>
-	);
+  return (
+    <HeaderContainer>
+      <HeaderContent>Hello John Doe</HeaderContent>
+      <MenuMobileButton
+        className={valueMobileMenu ? "active" : ""}
+        onClick={() => onClickOpenButton(!valueMobileMenu)}
+      >
+        <MenuMobileIcon />
+      </MenuMobileButton>
+    </HeaderContainer>
+  );
 }

@@ -18,6 +18,9 @@ export default function TableHistoryComponent({
 	data,
 	options,
 }: TableHistoryComponentProps) {
+	const handleOpenOrderInfo = (id: number) => {
+		console.log(`clicked on order ID: ${id}`);
+	};
 	return (
 		<TableWrap>
 			<TableContainer>
@@ -46,7 +49,7 @@ export default function TableHistoryComponent({
 								status,
 								price,
 							}) => (
-								<TableRow key={id}>
+								<TableRow onClick={() => handleOpenOrderInfo(id)} key={id}>
 									<TableCell>{order}</TableCell>
 									<TableCell>{date}</TableCell>
 									<TableCell>{table}</TableCell>

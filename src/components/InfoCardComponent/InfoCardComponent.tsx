@@ -14,11 +14,13 @@ import {
 type InfoCardComponentProps = {
 	options: string[];
 	description: OrderHistoryData;
+	openDetailsModal: () => void;
 };
 
 export function InfoCardComponent({
 	options,
 	description,
+	openDetailsModal,
 }: InfoCardComponentProps) {
 	return (
 		<CardContainer>
@@ -38,7 +40,7 @@ export function InfoCardComponent({
 						className='details-button'
 						fullWidth
 						textButton='Detalhes'
-						onClick={() => alert("Detalhes ainda não está pronto")}
+						onClick={openDetailsModal}
 						variant='outlined'
 					/>
 					<ButtonComponent

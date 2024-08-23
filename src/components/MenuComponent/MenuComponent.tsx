@@ -1,72 +1,69 @@
 "use client";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
-import useCheckDesktopScreen from "@/hooks/useCheckDesktopScreen";
-import { MenuMobileComponent } from "./components/MenuMobileComponent/MenuMobileComponent";
 import { menuList } from "@/mocks/menu";
-import { MenuDesktopComponent } from "./components/MenuDesktopComponent/MenuDesktopComponent";
 import { MenuContainer } from "./styles";
+import { List, ListItemButton, ListItemText } from "@mui/material";
+import useWindowLocation from "@/hooks/useWindowLocation";
 
 type MenuComponentProps = {
-	openMobileMenu?: boolean;
-	handleMobileMenu: (value: boolean) => void;
+  openMobileMenu?: boolean;
+  handleMobileMenu: (value: boolean) => void;
 };
 
 const MenuComponent = ({
-	openMobileMenu,
-	handleMobileMenu,
+  openMobileMenu,
+  handleMobileMenu,
 }: MenuComponentProps) => {
-	const router = useRouter();
-	const menuMobileRef = useRef<HTMLDivElement | null>(null);
-	const buttonsList = useRef<HTMLUListElement>(null);
-	const desktopScreen = useCheckDesktopScreen();
+  const location = useWindowLocation();
+  const router = useRouter();
+  const menuMobileRef = useRef<HTMLDivElement | null>(null);
+  const buttonsList = useRef<HTMLUListElement>(null);
 
-	const activeButtonStyle = (index: number) => {
-		if (buttonsList.current) {
-			const arrayButtonItens = Array.from(buttonsList.current.children);
-			arrayButtonItens.forEach((buttonItem) => {
-				buttonItem.classList.remove("active");
-			});
-			arrayButtonItens[index].classList.add("active");
-		}
-	};
+  const activeButtonStyle = (index: number) => {
+    if (buttonsList.current) {
+      const arrayButtonItens = Array.from(buttonsList.current.children);
+      arrayButtonItens.forEach((buttonItem) => {
+        buttonItem.classList.remove("active");
+      });
+      arrayButtonItens[index].classList.add("active");
+    }
+  };
 
-	const handlePushToRespectivePageButton = (
-		pageRouter: string,
-		indexButton: number
-	) => {
-		activeButtonStyle(indexButton);
-		handleMobileMenu(!openMobileMenu);
-		router.push(pageRouter);
-	};
+  const handlePushToRespectivePageButton = (
+    pageRouter: string,
+    indexButton: number
+  ) => {
+    activeButtonStyle(indexButton);
+    router.push(pageRouter);
+  };
 
-	const handleCloseMobileMenu = (targetValue: EventTarget) => {
-		return targetValue === menuMobileRef.current
-			? handleMobileMenu(false)
-			: null;
-	};
+  const handleCloseMobileMenu = (targetValue: EventTarget) => {
+    return targetValue === menuMobileRef.current
+      ? handleMobileMenu(false)
+      : null;
+  };
 
-	return (
-		<MenuContainer>
-			{!desktopScreen && (
-				<MenuMobileComponent
-					menuList={menuList}
-					openMobileMenu={openMobileMenu}
-					handleCloseMobileMenu={handleCloseMobileMenu}
-					handlePushToRespectivePageButton={handlePushToRespectivePageButton}
-					menuMobileRef={menuMobileRef}
-					buttonsList={buttonsList}
-				/>
-			)}
-			{desktopScreen && (
-				<MenuDesktopComponent
-					buttonsList={buttonsList}
-					menuList={menuList}
-					handlePushToRespectivePageButton={handlePushToRespectivePageButton}
-				/>
-			)}
-		</MenuContainer>
-	);
+  return (
+    <MenuContainer
+      ref={menuMobileRef}
+      onClick={(event) => handleCloseMobileMenu(event.target)}
+      className={openMobileMenu ? "openMenu" : ""}
+    >
+      <List ref={buttonsList}>
+        {menuList.map(({ id, text, icon, routeUrl }, index) => (
+          <ListItemButton
+            className={routeUrl === location ? "active" : ""}
+            onClick={() => handlePushToRespectivePageButton(routeUrl, index)}
+            key={id}
+          >
+            <span>{icon}</span>
+            <ListItemText>{text}</ListItemText>
+          </ListItemButton>
+        ))}
+      </List>
+    </MenuContainer>
+  );
 };
 
 export default MenuComponent;

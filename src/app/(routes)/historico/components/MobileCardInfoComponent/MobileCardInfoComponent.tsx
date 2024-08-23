@@ -5,16 +5,23 @@ import { MobileCardInfoContainer } from "./styles";
 type MobileCardInfoComponentProps = {
 	cardData: OrderHistoryData[];
 	options: string[];
+	openDetailsModal: () => void;
 };
 
 export default function MobileCardInfoComponent({
 	cardData,
 	options,
+	openDetailsModal,
 }: MobileCardInfoComponentProps) {
 	return (
 		<MobileCardInfoContainer>
 			{cardData.map((item, index) => (
-				<InfoCardComponent key={index} options={options} description={item} />
+				<InfoCardComponent
+					openDetailsModal={openDetailsModal}
+					key={index}
+					options={options}
+					description={item}
+				/>
 			))}
 		</MobileCardInfoContainer>
 	);
