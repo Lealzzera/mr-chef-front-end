@@ -17,7 +17,7 @@ const MenuComponent = ({
 }: MenuComponentProps) => {
   const location = useWindowLocation();
   const router = useRouter();
-  const menuMobileRef = useRef<HTMLDivElement | null>(null);
+  const menuContainerRef = useRef<HTMLDivElement | null>(null);
   const buttonsList = useRef<HTMLUListElement>(null);
 
   const activeButtonStyle = (index: number) => {
@@ -36,18 +36,20 @@ const MenuComponent = ({
   ) => {
     activeButtonStyle(indexButton);
     router.push(pageRouter);
+    handleMobileMenu(false);
   };
 
-  const handleCloseMobileMenu = (targetValue: EventTarget) => {
-    return targetValue === menuMobileRef.current
+  const handleClickOutsideMobileMenu = (targetValue: EventTarget) => {
+    console.log(targetValue);
+    return targetValue === menuContainerRef.current
       ? handleMobileMenu(false)
       : null;
   };
 
   return (
     <MenuContainer
-      ref={menuMobileRef}
-      onClick={(event) => handleCloseMobileMenu(event.target)}
+      ref={menuContainerRef}
+      onClick={(event) => handleClickOutsideMobileMenu(event.target)}
       className={openMobileMenu ? "openMenu" : ""}
     >
       <List ref={buttonsList}>
