@@ -34,3 +34,7 @@ export const DesktopCardContainer = styled.div`
     display: initial;
   }
 `;
+
+export const SkeletonContainer = styled.div`
+  margin-top: 1rem;
+`;

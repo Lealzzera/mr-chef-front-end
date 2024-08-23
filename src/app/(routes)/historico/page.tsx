@@ -6,6 +6,7 @@ import {
   HistoryContainer,
   HistoryPageTitle,
   MobileCardContainer,
+  SkeletonContainer,
 } from "./styles";
 import SkeletonTable from "@/components/SkeletonTable/SkeletonTable";
 import { historyData } from "@/mocks/history.mock";
@@ -49,7 +50,10 @@ const HistoryPage = () => {
       </HistoryPageTitle>
       <DesktopCardContainer>
         {loading ? (
-          <SkeletonTable skeletonSize={10} />
+          //TODO: Move it to inside DesktopTableComponent soon
+          <SkeletonContainer>
+            <SkeletonTable skeletonSize={15} />
+          </SkeletonContainer>
         ) : (
           <DesktopTableComponent options={options} historyData={historyData} />
         )}
@@ -57,7 +61,7 @@ const HistoryPage = () => {
 
       <MobileCardContainer>
         {loading ? (
-          <SkeletonTable variant="rectangular" skeletonSize={30} />
+          <SkeletonTable variant="rectangular" skeletonSize={10} />
         ) : (
           <MobileCardInfoComponent
             openDetailsModal={handleOpenModalOrderInfo}
