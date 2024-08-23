@@ -2,60 +2,72 @@
 
 import React, { useEffect, useState } from "react";
 import {
-	HistoryContainer,
-	HistoryPageTitle,
-	MobileCardContainer,
+  DesktopCardContainer,
+  HistoryContainer,
+  HistoryPageTitle,
+  MobileCardContainer,
 } from "./styles";
 import SkeletonTable from "@/components/SkeletonTable/SkeletonTable";
 import { historyData } from "@/mocks/history.mock";
-import useCheckDesktopScreen from "@/hooks/useCheckDesktopScreen";
 import DesktopTableComponent from "./components/DesktopTableComponent/DesktopTableComponent";
 import MobileCardInfoComponent from "./components/MobileCardInfoComponent/MobileCardInfoComponent";
+import { ModalOrderInfo } from "@/components/ModalOrderInfo/ModalOrderInfo";
 
 const HistoryPage = () => {
-	const [loading, setLoading] = useState(false);
-	const desktopScreen = useCheckDesktopScreen();
-	const options = [
-		"Pedidos",
-		"Data",
-		"Mesa",
-		"Cliente",
-		"Tipo",
-		"Pagamento",
-		"Garçom",
-		"Status",
-		"Valor",
-	];
+  const [loading, setLoading] = useState(true);
+  const [openModalOrderInfo, setOpenModalOrderInfo] = useState(false);
+  const options = [
+    "Pedidos",
+    "Data",
+    "Mesa",
+    "Cliente",
+    "Tipo",
+    "Pagamento",
+    "Garçom",
+    "Status",
+    "Valor",
+  ];
 
-	useEffect(() => {
-		setLoading(true);
-		setTimeout(() => {
-			setLoading(false);
-		}, 1000);
-	}, []);
-	return (
-		<HistoryContainer className='main-container'>
-			<HistoryPageTitle className='main-page-title'>
-				Histórico de Pedidos
-			</HistoryPageTitle>
-			{loading && desktopScreen && desktopScreen !== null && (
-				<SkeletonTable skeletonSize={10} />
-			)}
-			{!loading && desktopScreen && desktopScreen !== null && (
-				<DesktopTableComponent options={options} historyData={historyData} />
-			)}
-			{loading && !desktopScreen && desktopScreen !== null && (
-				<MobileCardContainer>
-					<SkeletonTable variant='rectangular' skeletonSize={30} />
-				</MobileCardContainer>
-			)}
-			{!loading && !desktopScreen && desktopScreen !== null && (
-				<MobileCardContainer>
-					<MobileCardInfoComponent options={options} cardData={historyData} />
-				</MobileCardContainer>
-			)}
-		</HistoryContainer>
-	);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
+  const handleOpenModalOrderInfo = () => {
+    setOpenModalOrderInfo(true);
+  };
+  return (
+    <HistoryContainer className="main-container">
+      <ModalOrderInfo
+        closeModal={() => setOpenModalOrderInfo(false)}
+        openModal={openModalOrderInfo}
+      />
+      <HistoryPageTitle className="main-page-title">
+        Histórico de Pedidos
+      </HistoryPageTitle>
+      <DesktopCardContainer>
+        {loading ? (
+          <SkeletonTable skeletonSize={10} />
+        ) : (
+          <DesktopTableComponent options={options} historyData={historyData} />
+        )}
+      </DesktopCardContainer>
+
+      <MobileCardContainer>
+        {loading ? (
+          <SkeletonTable variant="rectangular" skeletonSize={30} />
+        ) : (
+          <MobileCardInfoComponent
+            openDetailsModal={handleOpenModalOrderInfo}
+            options={options}
+            cardData={historyData}
+          />
+        )}
+      </MobileCardContainer>
+    </HistoryContainer>
+  );
 };
 
 export default HistoryPage;
