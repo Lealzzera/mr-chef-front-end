@@ -36,6 +36,7 @@ const MenuComponent = ({
   ) => {
     activeButtonStyle(indexButton);
     router.push(pageRouter);
+    handleMobileMenu(false);
   };
 
   const handleCloseMobileMenu = (targetValue: EventTarget) => {
