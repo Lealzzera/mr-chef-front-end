@@ -1,6 +1,6 @@
 "use client";
 
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import {
   AccessHereLink,
   AccountInfo,
@@ -25,11 +25,26 @@ import { useRouter } from "next/navigation";
 const LoginPage = () => {
   const [inputEmailValue, setInputEmailValue] = useState("");
   const [inputPasswordValue, setInputPasswordValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showError, setShowError] = useState(false);
   const route = useRouter();
 
   const preventForm = (event: SyntheticEvent) => {
     event.preventDefault();
-    route.push("/pedidos");
+    //TODO: remove it when deploy backend with API and auth EP
+    if (inputEmailValue.length === 0 && inputPasswordValue.length === 0) {
+      setShowError(false);
+    }
+    if (
+      inputEmailValue === "admin@admin.com" &&
+      inputPasswordValue === "admin"
+    ) {
+      setShowError(false);
+      route.push("/pedidos");
+    } else {
+      setShowError(true);
+      setErrorMessage("Credenciais inválidas.");
+    }
   };
 
   return (
@@ -66,6 +81,8 @@ const LoginPage = () => {
               variant="outlined"
               type="email"
               fullWidth
+              error={showError}
+              errorMessage={errorMessage}
               value={inputEmailValue}
               changeValue={setInputEmailValue}
             />
@@ -73,6 +90,8 @@ const LoginPage = () => {
               label="Senha"
               type="password"
               fullWidth
+              error={showError}
+              errorMessage={errorMessage}
               value={inputPasswordValue}
               changeValue={setInputPasswordValue}
             />
