@@ -9,7 +9,7 @@ export const MenuContainer = styled.nav`
   z-index: 99;
 
   & .MuiList-root {
-    background: var(--main-green);
+    background: var(--green-400);
     width: 14.625rem;
     padding-top: 0rem;
     padding-bottom: 0rem;
@@ -24,7 +24,7 @@ export const MenuContainer = styled.nav`
   & .MuiTypography-root {
     font-family: var(--main-font-sans);
     font-size: 1.125rem;
-    color: var(--dark-green);
+    color: var(--green-900);
   }
 
   & .MuiButtonBase-root {
@@ -33,7 +33,7 @@ export const MenuContainer = styled.nav`
   }
 
   & .MuiButtonBase-root.active {
-    background-color: var(--dark-green);
+    background-color: var(--green-900);
 
     & .MuiTypography-root {
       color: var(--main-white);
@@ -85,7 +85,7 @@ export const MenuContainer = styled.nav`
 
     & .MuiList-root {
       box-shadow: rgba(0, 1, 1, 0.6) 1px 1px 2px;
-      background: var(--main-green);
+      background: var(--green-400);
     }
 
     & .MuiButtonBase-root:hover {
@@ -96,7 +96,7 @@ export const MenuContainer = styled.nav`
       svg.filled-svg {
         fill: var(--main-white);
       }
-      background-color: var(--medium-green);
+      background-color: var(--green-700);
       .MuiTypography-root {
         color: var(--main-white);
       }
