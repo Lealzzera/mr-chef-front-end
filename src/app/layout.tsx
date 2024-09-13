@@ -21,7 +21,9 @@ export default function RootLayout({
       className={`${main_font_mono.variable} ${main_font_sans.variable} ${second_font.variable}`}
     >
       <body>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <main>
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        </main>
       </body>
     </html>
   );
