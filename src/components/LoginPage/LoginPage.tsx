@@ -17,7 +17,7 @@ import {
   TextWrap,
   TitleFormLogin,
 } from "./styles";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import InputFieldComponent from "../InputFieldComponent/InputFieldComponent";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import { useRouter } from "next/navigation";
