@@ -41,6 +41,8 @@ const LoginPage = () => {
       )
       .then((result) => result.data);
 
+    console.log(userToken);
+
     NextResponse.next().cookies.set("access_token", userToken);
 
     route.push("/pedidos");

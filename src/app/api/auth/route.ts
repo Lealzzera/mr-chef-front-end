@@ -13,9 +13,8 @@ export async function POST(req: NextRequest) {
         credentials: "include",
       }
     ).then((res) => {
+      console.log(res);
       const refreshToken = res.headers.get("set-cookie");
-      console.log(refreshToken);
-
       if (refreshToken) {
         cookies().set({
           name: "refresh_token",
