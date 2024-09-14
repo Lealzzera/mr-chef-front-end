@@ -21,15 +21,34 @@ import Image from "next/image";
 import InputFieldComponent from "../InputFieldComponent/InputFieldComponent";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import { NextResponse } from "next/server";
 
 const LoginPage = () => {
   const [inputEmailValue, setInputEmailValue] = useState("");
   const [inputPasswordValue, setInputPasswordValue] = useState("");
   const route = useRouter();
 
-  const preventForm = (event: SyntheticEvent) => {
-    event.preventDefault();
+  const handleLogin = async () => {
+    const userToken = await axios
+      .post(
+        "/api/auth",
+        {
+          email: inputEmailValue,
+          password: inputPasswordValue,
+        },
+        { withCredentials: true }
+      )
+      .then((result) => result.data);
+
+    NextResponse.next().cookies.set("access_token", userToken);
+
     route.push("/pedidos");
+  };
+
+  const preventForm = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    await handleLogin();
   };
 
   return (
