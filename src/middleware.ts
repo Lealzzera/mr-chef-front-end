@@ -1,11 +1,22 @@
 import { cookies } from "next/headers";
-import type { NextRequest } from "next/server";
-import jwt from "jsonwebtoken";
+import { NextResponse, type NextRequest } from "next/server";
+import { jwtDecode } from "jwt-decode";
+import { jwtVerify } from "jose";
+import { env } from "./env";
 
-export function middleware(req: NextRequest) {
-  const accessToken = cookies().get("access_token")?.value;
-  if (accessToken && process.env.JWT_ACCES_TOKEN_SECRET) {
-    console.log(accessToken);
+type DecodedToken = {
+  sub: string;
+  iat: number;
+  exp: number;
+};
+
+export async function middleware(req: NextRequest) {
+  const { cookies } = req;
+  const accessToken = cookies.get("access_token");
+  const refreshToken = cookies.get("refresh_token");
+
+  if ((!accessToken || !refreshToken) && req.nextUrl.pathname !== "/") {
+    return NextResponse.redirect(new URL("/", req.url));
   }
 }
 
