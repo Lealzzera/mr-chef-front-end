@@ -1,9 +1,10 @@
+import { env } from "@/env";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
-  const response = await fetch(`${process.env.MR_CHEFE_URL}/auth/sessions`, {
+  const response = await fetch(`${env.MR_CHEFE_URL}/auth/sessions`, {
     method: "POST",
     body: JSON.stringify({ email, password }),
     headers: {
