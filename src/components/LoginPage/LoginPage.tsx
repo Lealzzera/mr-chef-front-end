@@ -6,10 +6,12 @@ import {
   AccountInfo,
   ContainerFormInfo,
   ContainerInfo,
+  ErrorMessage,
   ForgotPasswordLink,
   FormLogin,
   ImageContainer,
   LeftSideContainer,
+  LoginButtonContainer,
   LoginDescription,
   LoginTitle,
   MainContainer,
@@ -21,15 +23,36 @@ import Image from "next/image";
 import InputFieldComponent from "../InputFieldComponent/InputFieldComponent";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
+import { authenticateUser } from "@/functions/api";
 
 const LoginPage = () => {
   const [inputEmailValue, setInputEmailValue] = useState("");
   const [inputPasswordValue, setInputPasswordValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const route = useRouter();
 
-  const preventForm = (event: SyntheticEvent) => {
+  const handleLogin = async () => {
+    setErrorMessage("");
+    try {
+      const response = await authenticateUser({
+        email: inputEmailValue,
+        password: inputPasswordValue,
+      });
+      route.push("/pedidos");
+      return response;
+    } catch (error) {
+      if (error instanceof AxiosError && error.status === 401) {
+        setErrorMessage("Email ou senha inválidos.");
+      } else {
+        setErrorMessage("Erro interno do servidor.");
+      }
+    }
+  };
+
+  const preventForm = async (event: SyntheticEvent) => {
     event.preventDefault();
-    route.push("/pedidos");
+    await handleLogin();
   };
 
   return (
@@ -43,14 +66,17 @@ const LoginPage = () => {
         </TextWrap>
         <ImageContainer>
           <Image
-            style={{ maxWidth: "32.188rem" }}
             src={"/images/coffe-shop-login-page.webp"}
             width={515}
             height={515}
             priority
-            sizes="100vw"
-            layout="responsive"
             alt="coffe-shop-image"
+            sizes="100vw"
+            style={{
+              maxWidth: "32.188rem",
+              width: "100%",
+              height: "auto",
+            }}
           />
         </ImageContainer>
       </LeftSideContainer>
@@ -64,6 +90,7 @@ const LoginPage = () => {
             <InputFieldComponent
               label="E-mail"
               variant="outlined"
+              showError={errorMessage.length > 0}
               type="email"
               fullWidth
               value={inputEmailValue}
@@ -72,15 +99,20 @@ const LoginPage = () => {
             <InputFieldComponent
               label="Senha"
               type="password"
+              showError={errorMessage.length > 0}
               fullWidth
               value={inputPasswordValue}
               changeValue={setInputPasswordValue}
             />
-            <ButtonComponent
-              type="submit"
-              fullWidth={true}
-              textButton="Entrar"
-            />
+            <LoginButtonContainer>
+              <ErrorMessage>{errorMessage}</ErrorMessage>
+              <ButtonComponent
+                disabled={!inputEmailValue || !inputPasswordValue}
+                type="submit"
+                fullWidth={true}
+                textButton="Entrar"
+              />
+            </LoginButtonContainer>
           </FormLogin>
           <ContainerInfo>
             <ForgotPasswordLink>Esqueci minha senha</ForgotPasswordLink>

@@ -63,7 +63,6 @@ export const ImageContainer = styled.div`
 
 export const FormLogin = styled.form`
   display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: center;
   gap: 1.25rem;
@@ -127,4 +126,16 @@ export const AccessHereLink = styled.span`
 export const ContainerInfo = styled.div`
   width: 20.938rem;
   margin-top: 1.875rem;
+`;
+
+export const LoginButtonContainer = styled.div`
+  margin-top: 0.5rem;
+  position: relative;
+`;
+
+export const ErrorMessage = styled.p`
+  color: #e10036;
+  font-size: 0.75rem;
+  position: absolute;
+  top: -10px;
 `;

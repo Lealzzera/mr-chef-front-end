@@ -11,6 +11,8 @@ type MenuComponentProps = {
   handleMobileMenu: (value: boolean) => void;
 };
 
+//TODO: IMPLEMENT A WAY TO LOGOUT
+
 const MenuComponent = ({
   openMobileMenu,
   handleMobileMenu,

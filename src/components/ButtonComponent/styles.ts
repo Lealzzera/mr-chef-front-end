@@ -9,4 +9,8 @@ export const ButtonContainer = styled.div`
     margin-top: 0.625rem;
     height: 3.5rem;
   }
+
+  & .MuiButtonBase-root.Mui-disabled {
+    opacity: 0.6;
+  }
 `;
