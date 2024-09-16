@@ -1,22 +1,15 @@
-import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
-import { jwtDecode } from "jwt-decode";
-import { jwtVerify } from "jose";
-import { env } from "./env";
-
-type DecodedToken = {
-  sub: string;
-  iat: number;
-  exp: number;
-};
-
+import verifyToken from "./functions/verifyToken";
 export async function middleware(req: NextRequest) {
   const { cookies } = req;
-  const accessToken = cookies.get("access_token");
-  const refreshToken = cookies.get("refresh_token");
+  const accessToken = cookies.get("access_token")?.value;
+  const isTokenValid = accessToken ? await verifyToken(accessToken) : false;
 
-  if ((!accessToken || !refreshToken) && req.nextUrl.pathname !== "/") {
+  if (!isTokenValid && req.nextUrl.pathname !== "/") {
     return NextResponse.redirect(new URL("/", req.url));
+  }
+  if (isTokenValid && req.nextUrl.pathname === "/") {
+    return NextResponse.redirect(new URL("/pedidos", req.url));
   }
 }
 
