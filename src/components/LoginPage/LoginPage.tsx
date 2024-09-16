@@ -23,8 +23,8 @@ import Image from "next/image";
 import InputFieldComponent from "../InputFieldComponent/InputFieldComponent";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import { useRouter } from "next/navigation";
-import axios, { AxiosError } from "axios";
-import { setCookie } from "cookies-next";
+import { AxiosError } from "axios";
+import { authenticateUser } from "@/functions/api";
 
 const LoginPage = () => {
   const [inputEmailValue, setInputEmailValue] = useState("");
@@ -33,25 +33,19 @@ const LoginPage = () => {
   const route = useRouter();
 
   const handleLogin = async () => {
+    setErrorMessage("");
     try {
-      setErrorMessage("");
-      const response = await axios.post(
-        "/api/auth",
-        {
-          email: inputEmailValue,
-          password: inputPasswordValue,
-        },
-        { withCredentials: true }
-      );
-      const { accessToken } = await response.data;
-      setCookie("access_token", accessToken);
-
-      return route.push("/pedidos");
+      const response = await authenticateUser({
+        email: inputEmailValue,
+        password: inputPasswordValue,
+      });
+      route.push("/pedidos");
+      return response;
     } catch (error) {
       if (error instanceof AxiosError && error.status === 401) {
-        setErrorMessage("E-mail ou senha inválidos!");
+        setErrorMessage("Email ou senha inválidos.");
       } else {
-        setErrorMessage("Erro interno do servidor!");
+        setErrorMessage("Erro interno do servidor.");
       }
     }
   };
