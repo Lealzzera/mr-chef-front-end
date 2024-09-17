@@ -6,9 +6,11 @@ export async function middleware(req: NextRequest) {
   const isTokenValid = accessToken ? await verifyToken(accessToken) : false;
 
   if (!isTokenValid && req.nextUrl.pathname !== "/") {
+    console.log({ isTokenValid }, { pathname: req.nextUrl.pathname });
     return NextResponse.redirect(new URL("/", req.url));
   }
   if (isTokenValid && req.nextUrl.pathname === "/") {
+    console.log({ isTokenValid });
     return NextResponse.redirect(new URL("/pedidos", req.url));
   }
 }
