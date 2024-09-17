@@ -5,6 +5,7 @@ export async function middleware(req: NextRequest) {
   const accessToken = cookies.get("access_token")?.value;
   const isTokenValid = accessToken ? await verifyToken(accessToken) : false;
 
+  console.log({ isTokenValid });
   if (!isTokenValid && req.nextUrl.pathname !== "/") {
     console.log({ isTokenValid }, { pathname: req.nextUrl.pathname });
     return NextResponse.redirect(new URL("/", req.url));
