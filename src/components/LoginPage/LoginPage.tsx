@@ -30,15 +30,19 @@ const LoginPage = () => {
   const [inputEmailValue, setInputEmailValue] = useState("");
   const [inputPasswordValue, setInputPasswordValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const route = useRouter();
 
   const handleLogin = async () => {
     setErrorMessage("");
+    setLoading(true);
     try {
       const response = await authenticateUser({
         email: inputEmailValue,
         password: inputPasswordValue,
       });
+      setInputEmailValue("");
+      setInputPasswordValue("");
       route.push("/pedidos");
       return response;
     } catch (error) {
@@ -47,6 +51,8 @@ const LoginPage = () => {
       } else {
         setErrorMessage("Erro interno do servidor.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -107,10 +113,11 @@ const LoginPage = () => {
             <LoginButtonContainer>
               <ErrorMessage>{errorMessage}</ErrorMessage>
               <ButtonComponent
-                disabled={!inputEmailValue || !inputPasswordValue}
+                disabled={!inputEmailValue || !inputPasswordValue || loading}
                 type="submit"
                 fullWidth={true}
                 textButton="Entrar"
+                loading={loading}
               />
             </LoginButtonContainer>
           </FormLogin>
