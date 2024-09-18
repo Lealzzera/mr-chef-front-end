@@ -11,8 +11,6 @@ type MenuComponentProps = {
   handleMobileMenu: (value: boolean) => void;
 };
 
-//TODO: IMPLEMENT A WAY TO LOGOUT
-
 const MenuComponent = ({
   openMobileMenu,
   handleMobileMenu,
@@ -32,11 +30,19 @@ const MenuComponent = ({
     }
   };
 
-  const handlePushToRespectivePageButton = (
+  const handleLogout = async () => {
+    await fetch("/api/remove-cookies").then((res) => res.json());
+    router.push("/");
+  };
+
+  const handlePushToRespectivePageButton = async (
     pageRouter: string,
     indexButton: number
   ) => {
     activeButtonStyle(indexButton);
+    if (pageRouter === "/") {
+      await handleLogout();
+    }
     router.push(pageRouter);
     handleMobileMenu(false);
   };

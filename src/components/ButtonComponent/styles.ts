@@ -13,4 +13,8 @@ export const ButtonContainer = styled.div`
   & .MuiButtonBase-root.Mui-disabled {
     opacity: 0.6;
   }
+
+  & .MuiCircularProgress-circle {
+    color: var(--green-200);
+  }
 `;
