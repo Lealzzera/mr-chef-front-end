@@ -32,7 +32,7 @@ const MenuComponent = ({
 
   const handleLogout = async () => {
     await fetch("/api/remove-cookies").then((res) => res.json());
-    router.push("/");
+    return router.push("/");
   };
 
   const handlePushToRespectivePageButton = async (
