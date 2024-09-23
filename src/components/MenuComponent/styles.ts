@@ -14,12 +14,16 @@ export const MenuContainer = styled.nav`
     padding-top: 0rem;
     padding-bottom: 0rem;
     height: calc(100vh - 4.375rem);
-    padding-bottom: 7rem;
+    padding-bottom: rem;
     overflow-y: scroll;
   }
 
   & .MuiList-root::-webkit-scrollbar {
     display: none;
+  }
+
+  & .MuiList-root {
+    scrollbar-width: none;
   }
 
   & .MuiTypography-root {
