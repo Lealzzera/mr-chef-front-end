@@ -5,6 +5,7 @@ import { menuList } from "@/mocks/menu";
 import { MenuContainer } from "./styles";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import useWindowLocation from "@/hooks/useWindowLocation";
+import logout from "@/actions/logout";
 
 type MenuComponentProps = {
   openMobileMenu?: boolean;
@@ -30,18 +31,13 @@ const MenuComponent = ({
     }
   };
 
-  const handleLogout = async () => {
-    await fetch("/api/remove-cookies").then((res) => res.json());
-    return router.push("/");
-  };
-
   const handlePushToRespectivePageButton = async (
     pageRouter: string,
     indexButton: number
   ) => {
     activeButtonStyle(indexButton);
     if (pageRouter === "/") {
-      await handleLogout();
+      await logout();
     }
     router.push(pageRouter);
     handleMobileMenu(false);

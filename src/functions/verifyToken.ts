@@ -1,3 +1,5 @@
+"user server";
+
 import { jwtVerify } from "jose";
 
 export default async function verifyToken(accessToken?: string) {
