@@ -23,8 +23,7 @@ import Image from "next/image";
 import InputFieldComponent from "../InputFieldComponent/InputFieldComponent";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import { useRouter } from "next/navigation";
-import { AxiosError } from "axios";
-import { authenticateUser } from "@/functions/api";
+import login from "@/actions/login";
 
 const LoginPage = () => {
   const [inputEmailValue, setInputEmailValue] = useState("");
@@ -36,23 +35,18 @@ const LoginPage = () => {
   const handleLogin = async () => {
     setErrorMessage("");
     setLoading(true);
-    try {
-      const response = await authenticateUser({
-        email: inputEmailValue,
-        password: inputPasswordValue,
-      });
-      setInputEmailValue("");
-      setInputPasswordValue("");
+    const response = await login({
+      email: inputEmailValue,
+      password: inputPasswordValue,
+    });
+    setLoading(false);
+
+    if (response === 401) {
+      setErrorMessage("E-mail ou senha inválidos.");
+    }
+
+    if (response === 201) {
       route.push("/pedidos");
-      return response;
-    } catch (error) {
-      if (error instanceof AxiosError && error.status === 401) {
-        setErrorMessage("Email ou senha inválidos.");
-      } else {
-        setErrorMessage("Erro interno do servidor.");
-      }
-    } finally {
-      setLoading(false);
     }
   };
 

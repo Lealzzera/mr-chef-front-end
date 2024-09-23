@@ -6,6 +6,8 @@ const urlInstance = axios.create({
   timeout: 1000,
 });
 
+//TODO: IMPLEMENTS IN THE FUTURE THE REFRESHTOKEN AND AUTHENTICATION WITH GOOGLE AND OUTLOOK EMAIL
+
 export async function authenticateUser({
   email,
   password,
