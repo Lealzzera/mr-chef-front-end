@@ -14,7 +14,7 @@ export const MenuContainer = styled.nav`
     padding-top: 0rem;
     padding-bottom: 0rem;
     height: calc(100vh - 4.375rem);
-    padding-bottom: 3rem;
+    padding-bottom: 7rem;
     overflow-y: scroll;
   }
 
