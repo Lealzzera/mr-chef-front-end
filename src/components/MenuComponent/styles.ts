@@ -14,6 +14,7 @@ export const MenuContainer = styled.nav`
     padding-top: 0rem;
     padding-bottom: 0rem;
     height: calc(100vh - 4.375rem);
+    padding-bottom: 3rem;
     overflow-y: scroll;
   }
 
@@ -86,6 +87,7 @@ export const MenuContainer = styled.nav`
     & .MuiList-root {
       box-shadow: rgba(0, 1, 1, 0.6) 1px 1px 2px;
       background: var(--green-400);
+      padding-bottom: 0;
     }
 
     & .MuiButtonBase-root:hover {
