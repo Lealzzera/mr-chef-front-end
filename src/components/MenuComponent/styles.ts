@@ -22,6 +22,10 @@ export const MenuContainer = styled.nav`
     display: none;
   }
 
+  & .MuiList-root {
+    scrollbar-width: none;
+  }
+
   & .MuiTypography-root {
     font-family: var(--main-font-sans);
     font-size: 1.125rem;
