@@ -3,20 +3,21 @@
 }
 
 :root {
-  --main-green: #006A37;
-  --light-green: #00BA61;
-  --medium-green: #005029;
-  --dark-green: #00371D;
-  --white: #FFF;
-  --main-white: #E5E7EB;
-  --white-2: #EAEAEA;
-  --black-text-color: #090922;
-  --blue-link-color: #0037c5;
-  --main-red: #E10036;
-  --main-yellow: #E3B100;
+  --green-200: #00ba61;
+  --green-400: #006a37;
+  --green-700: #005029;
+  --green-900: #00371d;
+  --white: #fff;
+  --grey-200: #eaeaea;
+  --grey-400: #e5e7eb;
+  --blue-400: #0037c5;
+  --blue-900: #090922;
+  --red-400: #e10036;
+  --yellow-400: #e3b100;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -25,19 +26,18 @@ html, body {
   overflow: hidden;
 }
 
-
-
 html {
   --main-font-sans: var(--main-font-sans), sans-serif;
   --main-font-mono: var(--main-font-mono), monospace;
   --second-font: var(--second-font);
-} 
+}
 
 html {
   font-family: var(--main-font-sans), sans-serif;
 }
 
-ul, li {
+ul,
+li {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -48,24 +48,32 @@ input {
   padding: 0px;
 }
 
-h1, h2, h3, h4, h5, h6, p, span, a, div, nav {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+div,
+nav {
   padding: 0px;
   margin: 0px;
 }
 
-
 .main-page-title {
-  color: var(--black-text-color);
+  color: var(--blue-900);
   font-size: 1.25rem;
   font-weight: bold;
 }
 
 .layout-pages-container {
   padding-top: 4.375rem;
-  background-color: var(--main-white);
+  background-color: var(--grey-400);
   min-height: 100vh;
   width: 100%;
-  
 }
 
 @media (min-width: 1200px) {
@@ -75,9 +83,9 @@ h1, h2, h3, h4, h5, h6, p, span, a, div, nav {
 }
 
 svg.stroked-svg {
-  stroke: var(--dark-green);
+  stroke: var(--green-900);
 }
 
 svg.filled-svg {
-  fill: var(--dark-green);
+  fill: var(--green-900);
 }

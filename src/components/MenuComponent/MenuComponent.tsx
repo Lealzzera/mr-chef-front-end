@@ -5,6 +5,7 @@ import { menuList } from "@/mocks/menu";
 import { MenuContainer } from "./styles";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import useWindowLocation from "@/hooks/useWindowLocation";
+import logout from "@/actions/logout";
 
 type MenuComponentProps = {
   openMobileMenu?: boolean;
@@ -30,12 +31,16 @@ const MenuComponent = ({
     }
   };
 
-  const handlePushToRespectivePageButton = (
+  const handlePushToRespectivePageButton = async (
     pageRouter: string,
     indexButton: number
   ) => {
     activeButtonStyle(indexButton);
+    if (pageRouter === "/") {
+      await logout();
+    }
     router.push(pageRouter);
+    handleMobileMenu(false);
   };
 
   const handleCloseMobileMenu = (targetValue: EventTarget) => {

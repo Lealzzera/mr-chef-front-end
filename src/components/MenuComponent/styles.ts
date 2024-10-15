@@ -9,11 +9,12 @@ export const MenuContainer = styled.nav`
   z-index: 99;
 
   & .MuiList-root {
-    background: var(--main-green);
+    background: var(--green-400);
     width: 14.625rem;
     padding-top: 0rem;
     padding-bottom: 0rem;
     height: calc(100vh - 4.375rem);
+    padding-bottom: 7rem;
     overflow-y: scroll;
   }
 
@@ -21,10 +22,14 @@ export const MenuContainer = styled.nav`
     display: none;
   }
 
+  & .MuiList-root {
+    scrollbar-width: none;
+  }
+
   & .MuiTypography-root {
     font-family: var(--main-font-sans);
     font-size: 1.125rem;
-    color: var(--dark-green);
+    color: var(--green-900);
   }
 
   & .MuiButtonBase-root {
@@ -33,18 +38,18 @@ export const MenuContainer = styled.nav`
   }
 
   & .MuiButtonBase-root.active {
-    background-color: var(--dark-green);
+    background-color: var(--green-900);
 
     & .MuiTypography-root {
-      color: var(--main-white);
+      color: var(--grey-400);
     }
 
     svg.stroked-svg {
-      stroke: var(--main-white);
+      stroke: var(--grey-400);
     }
 
     svg.filled-svg {
-      fill: var(--main-white);
+      fill: var(--grey-400);
     }
   }
 
@@ -85,20 +90,21 @@ export const MenuContainer = styled.nav`
 
     & .MuiList-root {
       box-shadow: rgba(0, 1, 1, 0.6) 1px 1px 2px;
-      background: var(--main-green);
+      background: var(--green-400);
+      padding-bottom: 0;
     }
 
     & .MuiButtonBase-root:hover {
       svg.stroked-svg {
-        stroke: var(--main-white);
+        stroke: var(--grey-400);
       }
 
       svg.filled-svg {
-        fill: var(--main-white);
+        fill: var(--grey-400);
       }
-      background-color: var(--medium-green);
+      background-color: var(--green-700);
       .MuiTypography-root {
-        color: var(--main-white);
+        color: var(--grey-400);
       }
     }
   }

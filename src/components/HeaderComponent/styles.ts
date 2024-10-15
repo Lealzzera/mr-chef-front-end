@@ -8,7 +8,7 @@ export const HeaderContainer = styled.header`
   position: fixed;
   z-index: 999;
   width: 100%;
-  background-color: var(--white-2);
+  background-color: var(--grey-200);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px;
   padding: 0rem 3.125rem;
 `;
