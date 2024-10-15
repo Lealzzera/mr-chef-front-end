@@ -27,13 +27,6 @@ export default async function login({
       httpOnly: true,
       secure: true,
       sameSite: "lax",
-      maxAge: 60 * 60,
-    });
-
-    cookies().set("refresh_token", data.refreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "lax",
       maxAge: 60 * 60 * 24 * 15,
     });
 
