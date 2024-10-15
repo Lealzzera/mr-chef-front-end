@@ -13,7 +13,7 @@ export const MainContainer = styled.div`
 
 export const LoginTitle = styled.h1`
   font-size: 2.25rem;
-  color: var(--main-white);
+  color: var(--grey-400);
 `;
 
 export const LoginDescription = styled.h2`
@@ -48,7 +48,7 @@ export const RightSideContainer = styled.div`
   background-color: transparent;
   width: 100%;
   @media (min-width: 1200px) {
-    background-color: var(--main-white);
+    background-color: var(--grey-400);
     width: 40vw;
     height: auto;
   }
@@ -105,13 +105,13 @@ export const TitleFormLogin = styled.p`
 
 export const ForgotPasswordLink = styled.p`
   font-size: 0.875rem;
-  color: var(--blue-link-color);
+  color: var(--blue-400);
   cursor: pointer;
 `;
 
 export const AccountInfo = styled.p`
   font-size: 1rem;
-  color: var(--black-text-color);
+  color: var(--blue-900);
   margin-top: 3.125rem;
 `;
 

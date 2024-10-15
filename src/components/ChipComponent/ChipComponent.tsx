@@ -7,9 +7,9 @@ const ChipComponent = ({ textChip }: { textChip: string }) => {
       case StatusEnum.DELIVERED:
         return "var(--green-200)";
       case StatusEnum.CANCELED:
-        return "var(--main-red)";
+        return "var(--red-400)";
       case StatusEnum.PREPARING:
-        return "var(--main-yellow)";
+        return "var(--yellow-400)";
     }
   };
   return (

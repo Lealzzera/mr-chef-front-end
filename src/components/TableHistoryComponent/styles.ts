@@ -10,7 +10,7 @@ export const TableWrap = styled.div`
 
     & .MuiTableHead-root {
       & .MuiTableCell-root {
-        color: var(--black-text-color);
+        color: var(--blue-900);
         font-size: 1rem;
         font-weight: bold;
       }
@@ -23,7 +23,7 @@ export const TableWrap = styled.div`
         cursor: pointer;
         font-family: var(--second-font);
         font-size: 1rem;
-        color: var(--black-text-color);
+        color: var(--blue-900);
       }
 
       & .MuiTableCell-root .MuiButtonBase-root {

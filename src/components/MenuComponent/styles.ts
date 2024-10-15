@@ -41,15 +41,15 @@ export const MenuContainer = styled.nav`
     background-color: var(--green-900);
 
     & .MuiTypography-root {
-      color: var(--main-white);
+      color: var(--grey-400);
     }
 
     svg.stroked-svg {
-      stroke: var(--main-white);
+      stroke: var(--grey-400);
     }
 
     svg.filled-svg {
-      fill: var(--main-white);
+      fill: var(--grey-400);
     }
   }
 
@@ -96,15 +96,15 @@ export const MenuContainer = styled.nav`
 
     & .MuiButtonBase-root:hover {
       svg.stroked-svg {
-        stroke: var(--main-white);
+        stroke: var(--grey-400);
       }
 
       svg.filled-svg {
-        fill: var(--main-white);
+        fill: var(--grey-400);
       }
       background-color: var(--green-700);
       .MuiTypography-root {
-        color: var(--main-white);
+        color: var(--grey-400);
       }
     }
   }

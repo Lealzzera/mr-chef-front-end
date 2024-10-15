@@ -15,6 +15,6 @@ export const TextFieldContainer = styled.div`
   }
 
   & .MuiInputBase-input {
-    color: var(--black-text-color);
+    color: var(--blue-900);
   }
 `;

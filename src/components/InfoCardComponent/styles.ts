@@ -11,7 +11,7 @@ export const CardContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.313rem;
-  color: var(--black-text-color);
+  color: var(--blue-900);
 `;
 
 export const CardOptionTitle = styled.p`
