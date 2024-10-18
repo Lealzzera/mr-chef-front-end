@@ -4,12 +4,15 @@
 
 :root {
   --green-200: #00ba61;
+  --green-300: #00691e;
   --green-400: #006a37;
   --green-700: #005029;
   --green-900: #00371d;
   --white: #fff;
+  --grey-100: #f5f5f5;
   --grey-200: #eaeaea;
   --grey-400: #e5e7eb;
+  --grey-800: #1e1e1e;
   --blue-400: #0037c5;
   --blue-900: #090922;
   --red-400: #e10036;
