@@ -17,4 +17,10 @@ export const ButtonContainer = styled.div`
   & .MuiCircularProgress-circle {
     color: var(--green-200);
   }
+
+  & .MuiButton-outlined {
+    background-color: transparent;
+    color: var(--green-300);
+    border: 2px solid var(--green-300);
+  }
 `;
