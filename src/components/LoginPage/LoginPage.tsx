@@ -118,8 +118,11 @@ const LoginPage = () => {
           <ContainerInfo>
             <ForgotPasswordLink>Esqueci minha senha</ForgotPasswordLink>
             <AccountInfo>
-              Não possui uma conta?
-              <AccessHereLink> Acesse aqui</AccessHereLink> <br />e se cadastre!
+              Não possui uma conta?{" "}
+              <AccessHereLink onClick={() => route.push("/cadastro")}>
+                Acesse aqui
+              </AccessHereLink>
+              <br />e se cadastre!
             </AccountInfo>
           </ContainerInfo>
         </ContainerFormInfo>
