@@ -8,13 +8,13 @@ export const CardInfoContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 1.25rem;
   justify-content: center;
 `;
 
 export const CardInfoTitle = styled.p`
   color: var(--green-300);
-  margin-top: 20px;
+  margin-top: 1.25rem;
   font-weight: bold;
   font-size: 1rem;
   text-align: center;

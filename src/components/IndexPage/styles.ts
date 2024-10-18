@@ -9,7 +9,7 @@ export const HeaderPage = styled.header`
   justify-content: space-between;
   padding: 1rem 2rem;
   @media (min-width: 1200px) {
-    padding: 30px 150px;
+    padding: 1.875rem 9.375rem;
   }
 `;
 
@@ -65,7 +65,7 @@ export const CreateAccountButtonContainer = styled.div`
     margin-top: 2.5rem;
     text-transform: capitalize;
     background-color: var(--green-300);
-    height: 45px;
+    height: 2.813rem;
   }
 `;
 
@@ -112,7 +112,7 @@ export const InfoCardsList = styled.ul`
 
 export const FooterPage = styled.footer`
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 6.25rem;
   display: flex;
   margin-bottom: 2rem;
   max-width: 1000px;
