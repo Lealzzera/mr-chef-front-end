@@ -1,9 +1,9 @@
-import LoginPage from "@/components/LoginPage/LoginPage";
+import IndexPage from "@/components/IndexPage/IndexPage";
 
 export default function Home() {
   return (
     <section>
-      <LoginPage />
+      <IndexPage />
     </section>
   );
 }
