@@ -7,12 +7,8 @@ import {
   CreateAccountButtonContainer,
   CreateAccountSection,
   FooterPage,
-  HeaderPage,
   InfoCardsContainer,
   InfoCardsList,
-  LoginButtonContainer,
-  LogoContainer,
-  LogoText,
   MainContainer,
   MainInfoCardContainer,
   MainTitle,
@@ -28,6 +24,7 @@ import ShoppingBagIcon from "@/icons/ShoppingBagIcon";
 import SmartphoneIcon from "@/icons/SmartphoneIcon";
 import CopyrightIcon from "@/icons/CopyrightIcon";
 import { useRouter } from "next/navigation";
+import IndexPageHeaderComponent from "../IndexPageHeaderComponent/IndexPageHeaderComponent";
 
 const cardsContent = [
   {
@@ -73,26 +70,17 @@ export default function IndexPage() {
   const route = useRouter();
   return (
     <MainContainer>
-      <HeaderPage>
-        <LogoContainer>
-          <ChefLogoIcon />
-          <LogoText>Mr. Chefe</LogoText>
-        </LogoContainer>
-        <LoginButtonContainer>
-          <ButtonComponent
-            onClick={() => route.push("/login")}
-            textButton="Login"
-            variant="outlined"
-          />
-        </LoginButtonContainer>
-      </HeaderPage>
+      <IndexPageHeaderComponent />
       <CreateAccountSection>
         <MainTitle>Gerencie seu restaurante com facilidade.</MainTitle>
         <SubTitle>
           Mr. Chefe é a solução completa para gestão de restaurantes.
         </SubTitle>
         <CreateAccountButtonContainer>
-          <ButtonComponent textButton="Criar Conta" />
+          <ButtonComponent
+            onClick={() => route.push("/cadastro")}
+            textButton="Criar Conta"
+          />
         </CreateAccountButtonContainer>
       </CreateAccountSection>
       <CardsInfoSection>
