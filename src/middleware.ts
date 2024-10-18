@@ -7,7 +7,8 @@ export async function middleware(req: NextRequest) {
   if (
     !isTokenValid &&
     req.nextUrl.pathname !== "/" &&
-    req.nextUrl.pathname !== "/login"
+    req.nextUrl.pathname !== "/login" &&
+    req.nextUrl.pathname !== "/cadastro"
   ) {
     return NextResponse.redirect(new URL("/", req.url));
   }
