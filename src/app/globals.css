@@ -64,6 +64,7 @@ div,
 nav {
   padding: 0px;
   margin: 0px;
+  font-family: var(--main-font-sans), sans-serif;
 }
 
 .main-page-title {
