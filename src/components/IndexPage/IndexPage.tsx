@@ -3,10 +3,8 @@
 import ChefLogoIcon from "@/icons/ChefLogoICon";
 import {
   CardsInfoSection,
-  CopyRightText,
   CreateAccountButtonContainer,
   CreateAccountSection,
-  FooterPage,
   InfoCardsContainer,
   InfoCardsList,
   MainContainer,
@@ -22,9 +20,9 @@ import AnalyticsIcon from "@/icons/AnalyticsIcon";
 import QRCodeIcon from "@/icons/QRCodeIcon";
 import ShoppingBagIcon from "@/icons/ShoppingBagIcon";
 import SmartphoneIcon from "@/icons/SmartphoneIcon";
-import CopyrightIcon from "@/icons/CopyrightIcon";
 import { useRouter } from "next/navigation";
 import IndexPageHeaderComponent from "../IndexPageHeaderComponent/IndexPageHeaderComponent";
+import IndexPageFooterComponent from "../IndexPageFooterComponent/IndexPageFooterComponent";
 
 const cardsContent = [
   {
@@ -106,12 +104,7 @@ export default function IndexPage() {
           </InfoCardsList>
         </InfoCardsContainer>
       </CardsInfoSection>
-      <FooterPage>
-        <CopyrightIcon />
-        <CopyRightText>
-          2024 Mr. Chefe. Todos os direitos reservados.
-        </CopyRightText>
-      </FooterPage>
+      <IndexPageFooterComponent />
     </MainContainer>
   );
 }
