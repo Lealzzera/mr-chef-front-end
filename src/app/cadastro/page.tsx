@@ -14,6 +14,7 @@ import ChefLogoIcon from "@/icons/ChefLogoICon";
 import InputFieldComponent from "@/components/InputFieldComponent/InputFieldComponent";
 import ButtonComponent from "@/components/ButtonComponent/ButtonComponent";
 import React, { useState } from "react";
+import IndexPageFooterComponent from "@/components/IndexPageFooterComponent/IndexPageFooterComponent";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -123,6 +124,7 @@ export default function SignUp() {
           </ButtonContainer>
         </SignUpForm>
       </FormContainer>
+      <IndexPageFooterComponent />
     </>
   );
 }
