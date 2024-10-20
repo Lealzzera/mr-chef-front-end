@@ -82,7 +82,7 @@ export default function SignUp() {
               value={formData.email}
               name="email"
               changeValue={handleChange}
-              type="text"
+              type="email"
               fullWidth
               label="E-mail"
             />
@@ -116,7 +116,14 @@ export default function SignUp() {
           </SignUpFormWrappFields>
           <ButtonContainer>
             <ButtonComponent
-              disabled={false}
+              disabled={
+                !formData.name ||
+                !formData.cpf ||
+                !formData.email ||
+                !formData.phoneNumber ||
+                !formData.password ||
+                !formData.confirmedPassword
+              }
               type="submit"
               fullWidth
               textButton="Criar Conta"
