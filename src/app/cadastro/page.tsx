@@ -22,6 +22,7 @@ import { removeDashAndDots } from "@/helpers/removeDashAndDots";
 import { registerUser } from "@/functions/api";
 import { validatePassword } from "@/helpers/validatePassword";
 import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -35,6 +36,7 @@ export default function SignUp() {
 
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const route = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,6 +75,7 @@ export default function SignUp() {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     e.preventDefault();
     const isPasswordValid = validatePassword({
       password: formData.password,
@@ -84,6 +87,7 @@ export default function SignUp() {
     if (!isPasswordValid.valid) {
       setError(true);
       setErrorMessage(isPasswordValid.message);
+      setLoading(false);
       return;
     }
 
@@ -98,8 +102,19 @@ export default function SignUp() {
     if (response?.message?.statusCode === 409) {
       setError(true);
       setErrorMessage("Email fornecido já existe.");
+      setLoading(false);
       return;
     }
+
+    if (response instanceof AxiosError) {
+      setError(true);
+      setErrorMessage(
+        "Ocorreu um erro inesperado, tente novamente mais tarde."
+      );
+      setLoading(false);
+      return;
+    }
+    setLoading(false);
 
     route.push("/login");
     clearFormData();
@@ -181,6 +196,7 @@ export default function SignUp() {
               <ErrorMessage>{errorMessage}</ErrorMessage>
             </div>
             <ButtonComponent
+              loading={loading}
               disabled={
                 !formData.name ||
                 !formData.cpf ||
