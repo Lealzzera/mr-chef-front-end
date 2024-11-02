@@ -64,7 +64,16 @@ export const SignUpFormWrappFields = styled.div`
 export const ButtonContainer = styled.div`
   margin-top: 2rem;
   padding: 0 1.5rem;
+  position: relative;
   @media (min-width: 750px) {
     padding: 0 4rem;
   }
+`;
+
+export const ErrorMessage = styled.p`
+  color: #e10036;
+  font-size: 0.75rem;
+  position: absolute;
+  top: -25px;
+  padding: 0rem 1.5rem 0rem 0rem;
 `;

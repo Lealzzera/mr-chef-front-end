@@ -3,6 +3,7 @@
 import IndexPageHeaderComponent from "@/components/IndexPageHeaderComponent/IndexPageHeaderComponent";
 import {
   ButtonContainer,
+  ErrorMessage,
   FormContainer,
   SignUpForm,
   SignUpFormWrappFields,
@@ -15,6 +16,12 @@ import InputFieldComponent from "@/components/InputFieldComponent/InputFieldComp
 import ButtonComponent from "@/components/ButtonComponent/ButtonComponent";
 import React, { useState } from "react";
 import IndexPageFooterComponent from "@/components/IndexPageFooterComponent/IndexPageFooterComponent";
+import { validateAndFormatCpf } from "@/helpers/validateAndFormatCpf";
+import { validateAndFormatPhoneNumber } from "@/helpers/validateAndFormatPhoneNumber";
+import { removeDashAndDots } from "@/helpers/removeDashAndDots";
+import { registerUser } from "@/functions/api";
+import { validatePassword } from "@/helpers/validatePassword";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -26,17 +33,35 @@ export default function SignUp() {
     confirmedPassword: "",
   });
 
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const route = useRouter();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevValue) => ({
-      ...prevValue,
-      [name]: value,
-    }));
+    if (name !== "cpf" && name !== "phoneNumber") {
+      setFormData((prevValue) => ({
+        ...prevValue,
+        [name]: value,
+      }));
+    }
+    if (name === "cpf") {
+      const formattedCPF = validateAndFormatCpf(value);
+      setFormData((prevValue) => ({
+        ...prevValue,
+        [name]: formattedCPF,
+      }));
+    }
+    if (name === "phoneNumber") {
+      const formattedPhoneNumber = validateAndFormatPhoneNumber(value);
+      setFormData((prevValue) => ({
+        ...prevValue,
+        [name]: formattedPhoneNumber,
+      }));
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(formData);
+  const clearFormData = () => {
     setFormData({
       name: "",
       cpf: "",
@@ -45,6 +70,39 @@ export default function SignUp() {
       password: "",
       confirmedPassword: "",
     });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const isPasswordValid = validatePassword({
+      password: formData.password,
+      confirmPassword: formData.confirmedPassword,
+    });
+    setError(false);
+    setErrorMessage("");
+
+    if (!isPasswordValid.valid) {
+      setError(true);
+      setErrorMessage(isPasswordValid.message);
+      return;
+    }
+
+    const response = await registerUser({
+      name: formData.name,
+      cpf: removeDashAndDots(formData.cpf),
+      email: formData.email,
+      phoneNumber: removeDashAndDots(formData.phoneNumber),
+      password: formData.password,
+    });
+
+    if (response?.message?.statusCode === 409) {
+      setError(true);
+      setErrorMessage("Email fornecido já existe.");
+      return;
+    }
+
+    route.push("/login");
+    clearFormData();
   };
   return (
     <>
@@ -76,6 +134,8 @@ export default function SignUp() {
               value={formData.cpf}
               fullWidth
               label="CPF"
+              maxLength={14}
+              minLength={14}
             />
             <InputFieldComponent
               showError={false}
@@ -93,10 +153,12 @@ export default function SignUp() {
               changeValue={handleChange}
               type="text"
               fullWidth
+              maxLength={15}
+              minLength={15}
               label="Telefone"
             />
             <InputFieldComponent
-              showError={false}
+              showError={error}
               value={formData.password}
               changeValue={handleChange}
               name="password"
@@ -105,7 +167,7 @@ export default function SignUp() {
               label="Senha"
             />
             <InputFieldComponent
-              showError={false}
+              showError={error}
               changeValue={handleChange}
               type="password"
               name="confirmedPassword"
@@ -115,6 +177,9 @@ export default function SignUp() {
             />
           </SignUpFormWrappFields>
           <ButtonContainer>
+            <div>
+              <ErrorMessage>{errorMessage}</ErrorMessage>
+            </div>
             <ButtonComponent
               disabled={
                 !formData.name ||
@@ -122,7 +187,9 @@ export default function SignUp() {
                 !formData.email ||
                 !formData.phoneNumber ||
                 !formData.password ||
-                !formData.confirmedPassword
+                !formData.confirmedPassword ||
+                formData.cpf.length < 14 ||
+                formData.phoneNumber.length < 15
               }
               type="submit"
               fullWidth
