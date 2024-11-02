@@ -3,16 +3,10 @@
 import ChefLogoIcon from "@/icons/ChefLogoICon";
 import {
   CardsInfoSection,
-  CopyRightText,
   CreateAccountButtonContainer,
   CreateAccountSection,
-  FooterPage,
-  HeaderPage,
   InfoCardsContainer,
   InfoCardsList,
-  LoginButtonContainer,
-  LogoContainer,
-  LogoText,
   MainContainer,
   MainInfoCardContainer,
   MainTitle,
@@ -26,8 +20,9 @@ import AnalyticsIcon from "@/icons/AnalyticsIcon";
 import QRCodeIcon from "@/icons/QRCodeIcon";
 import ShoppingBagIcon from "@/icons/ShoppingBagIcon";
 import SmartphoneIcon from "@/icons/SmartphoneIcon";
-import CopyrightIcon from "@/icons/CopyrightIcon";
 import { useRouter } from "next/navigation";
+import IndexPageHeaderComponent from "../IndexPageHeaderComponent/IndexPageHeaderComponent";
+import IndexPageFooterComponent from "../IndexPageFooterComponent/IndexPageFooterComponent";
 
 const cardsContent = [
   {
@@ -73,26 +68,17 @@ export default function IndexPage() {
   const route = useRouter();
   return (
     <MainContainer>
-      <HeaderPage>
-        <LogoContainer>
-          <ChefLogoIcon />
-          <LogoText>Mr. Chefe</LogoText>
-        </LogoContainer>
-        <LoginButtonContainer>
-          <ButtonComponent
-            onClick={() => route.push("/login")}
-            textButton="Login"
-            variant="outlined"
-          />
-        </LoginButtonContainer>
-      </HeaderPage>
+      <IndexPageHeaderComponent />
       <CreateAccountSection>
         <MainTitle>Gerencie seu restaurante com facilidade.</MainTitle>
         <SubTitle>
           Mr. Chefe é a solução completa para gestão de restaurantes.
         </SubTitle>
         <CreateAccountButtonContainer>
-          <ButtonComponent textButton="Criar Conta" />
+          <ButtonComponent
+            onClick={() => route.push("/cadastro")}
+            textButton="Criar Conta"
+          />
         </CreateAccountButtonContainer>
       </CreateAccountSection>
       <CardsInfoSection>
@@ -118,12 +104,7 @@ export default function IndexPage() {
           </InfoCardsList>
         </InfoCardsContainer>
       </CardsInfoSection>
-      <FooterPage>
-        <CopyrightIcon />
-        <CopyRightText>
-          2024 Mr. Chefe. Todos os direitos reservados.
-        </CopyRightText>
-      </FooterPage>
+      <IndexPageFooterComponent />
     </MainContainer>
   );
 }

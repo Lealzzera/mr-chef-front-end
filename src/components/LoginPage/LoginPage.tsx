@@ -26,18 +26,28 @@ import { useRouter } from "next/navigation";
 import login from "@/actions/login";
 
 const LoginPage = () => {
-  const [inputEmailValue, setInputEmailValue] = useState("");
-  const [inputPasswordValue, setInputPasswordValue] = useState("");
+  const [userInputData, setUserInputData] = useState({
+    email: "",
+    password: "",
+  });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const route = useRouter();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserInputData((prevValue) => ({
+      ...prevValue,
+      [name]: value,
+    }));
+  };
 
   const handleLogin = async () => {
     setErrorMessage("");
     setLoading(true);
     const response = await login({
-      email: inputEmailValue,
-      password: inputPasswordValue,
+      email: userInputData.email,
+      password: userInputData.password,
     });
     setLoading(false);
 
@@ -92,22 +102,26 @@ const LoginPage = () => {
               variant="outlined"
               showError={errorMessage.length > 0}
               type="email"
+              name="email"
               fullWidth
-              value={inputEmailValue}
-              changeValue={setInputEmailValue}
+              value={userInputData.email}
+              changeValue={handleChange}
             />
             <InputFieldComponent
               label="Senha"
               type="password"
+              name="password"
               showError={errorMessage.length > 0}
               fullWidth
-              value={inputPasswordValue}
-              changeValue={setInputPasswordValue}
+              value={userInputData.password}
+              changeValue={handleChange}
             />
             <LoginButtonContainer>
               <ErrorMessage>{errorMessage}</ErrorMessage>
               <ButtonComponent
-                disabled={!inputEmailValue || !inputPasswordValue || loading}
+                disabled={
+                  !userInputData.email || !userInputData.password || loading
+                }
                 type="submit"
                 fullWidth={true}
                 textButton="Entrar"
@@ -118,8 +132,11 @@ const LoginPage = () => {
           <ContainerInfo>
             <ForgotPasswordLink>Esqueci minha senha</ForgotPasswordLink>
             <AccountInfo>
-              Não possui uma conta?
-              <AccessHereLink> Acesse aqui</AccessHereLink> <br />e se cadastre!
+              Não possui uma conta?{" "}
+              <AccessHereLink onClick={() => route.push("/cadastro")}>
+                Acesse aqui
+              </AccessHereLink>
+              <br />e se cadastre!
             </AccountInfo>
           </ContainerInfo>
         </ContainerFormInfo>

@@ -1,6 +1,6 @@
 "use client";
 
-import { TextField } from "@mui/material";
+import { TextField, TextFieldProps } from "@mui/material";
 import React from "react";
 import { TextFieldContainer } from "./styles";
 
@@ -11,9 +11,11 @@ type InputFieldComponentProps = {
   type: string;
   fullWidth?: boolean;
   value: string;
-  changeValue: (value: string) => void;
+  changeValue: (value: any) => void;
   showError: boolean;
-};
+  maxLength?: number;
+  minLength?: number;
+} & TextFieldProps;
 
 const InputFieldComponent = ({
   id,
@@ -24,6 +26,9 @@ const InputFieldComponent = ({
   value,
   changeValue,
   showError,
+  maxLength,
+  minLength,
+  ...props
 }: InputFieldComponentProps) => {
   return (
     <TextFieldContainer>
@@ -35,7 +40,9 @@ const InputFieldComponent = ({
         type={type}
         fullWidth={fullWidth}
         value={value}
-        onChange={(event) => changeValue(event.target.value)}
+        onChange={changeValue}
+        inputProps={{ maxLength: maxLength ?? "", minLength: minLength ?? "" }}
+        {...props}
       />
     </TextFieldContainer>
   );

@@ -1,6 +1,7 @@
 const ChefLogoIcon = () => {
   return (
     <svg
+      className="chef-logo-icon"
       width="30"
       height="30"
       viewBox="0 0 30 30"

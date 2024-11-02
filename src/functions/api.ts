@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AuthenticateUserType } from "./api.types";
+import { AuthenticateUserType, RegisterUserType } from "./api.types";
 
 const urlInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_MR_CHEFE_URL,
@@ -24,4 +24,32 @@ export async function authenticateUser({
   );
 
   return response.data;
+}
+
+export async function registerUser({
+  name,
+  email,
+  password,
+  phoneNumber,
+  cpf,
+}: RegisterUserType) {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_MR_CHEFE_URL}/users/register`,
+      {
+        name,
+        email,
+        password,
+        phoneNumber,
+        cpf,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (err) {
+    return err;
+  }
 }
