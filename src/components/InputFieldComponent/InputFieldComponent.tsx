@@ -13,6 +13,8 @@ type InputFieldComponentProps = {
   value: string;
   changeValue: (value: any) => void;
   showError: boolean;
+  maxLength?: number;
+  minLength?: number;
 } & TextFieldProps;
 
 const InputFieldComponent = ({
@@ -24,6 +26,8 @@ const InputFieldComponent = ({
   value,
   changeValue,
   showError,
+  maxLength,
+  minLength,
   ...props
 }: InputFieldComponentProps) => {
   return (
@@ -37,6 +41,7 @@ const InputFieldComponent = ({
         fullWidth={fullWidth}
         value={value}
         onChange={changeValue}
+        inputProps={{ maxLength: maxLength ?? "", minLength: minLength ?? "" }}
         {...props}
       />
     </TextFieldContainer>
