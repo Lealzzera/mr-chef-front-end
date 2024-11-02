@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { main_font_mono, main_font_sans, second_font } from "./functions/fonts";
-import StyledComponentsRegistry from "./lib/registry";
+import StyledComponentsRegistry from "@/lib/registry";
 
 export const metadata: Metadata = {
   title: "Mr. Chefe",

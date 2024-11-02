@@ -8,6 +8,7 @@ export const ButtonContainer = styled.div`
     font-weight: bold;
     margin-top: 0.625rem;
     height: 3.5rem;
+    cursor: "pointer";
   }
 
   & .MuiButtonBase-root.Mui-disabled {
