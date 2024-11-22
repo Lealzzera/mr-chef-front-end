@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { LoginResponse } from "./actions.type";
 
 export default async function login({
   email,
@@ -8,7 +9,7 @@ export default async function login({
 }: {
   email: string;
   password: string;
-}) {
+}): Promise<LoginResponse> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_MR_CHEFE_URL}/auth/sessions`,
@@ -27,18 +28,11 @@ export default async function login({
       httpOnly: true,
       secure: true,
       sameSite: "lax",
-      maxAge: 60 * 60,
+      maxAge: 60 * 60 * 24 * 20,
     });
 
-    cookies().set("refresh_token", data.refreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 15,
-    });
-
-    return response.status;
-  } catch (err) {
+    return { data, status: response.status };
+  } catch (err: any) {
     return err;
   }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { main_font_mono, main_font_sans, second_font } from "./functions/fonts";
 import StyledComponentsRegistry from "@/lib/registry";
+import { Providers } from "@/providers/providers";
 
 export const metadata: Metadata = {
   title: "Mr. Chefe",
@@ -23,11 +24,13 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${main_font_mono.variable} ${main_font_sans.variable} ${second_font.variable}`}
     >
-      <body>
-        <main>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </main>
-      </body>
+      <Providers>
+        <body>
+          <main>
+            <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          </main>
+        </body>
+      </Providers>
     </html>
   );
 }

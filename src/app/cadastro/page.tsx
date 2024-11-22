@@ -22,6 +22,7 @@ import { removeDashAndDots } from "@/helpers/removeDashAndDots";
 import { registerUser } from "@/functions/api";
 import { validatePassword } from "@/helpers/validatePassword";
 import { useRouter } from "next/navigation";
+import { useUserContext } from "@/context/userContext/userContext";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -97,7 +98,7 @@ export default function SignUp() {
 
     if (response?.message?.statusCode === 409) {
       setError(true);
-      setErrorMessage("Email fornecido já existe.");
+      setErrorMessage("Email fornecido ou número de telefone já existe.");
       return;
     }
 
