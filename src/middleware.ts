@@ -14,9 +14,11 @@ export async function middleware(req: NextRequest) {
   }
   if (
     isTokenValid &&
-    (req.nextUrl.pathname === "/login" || req.nextUrl.pathname === "/")
+    (req.nextUrl.pathname === "/login" ||
+      req.nextUrl.pathname === "/" ||
+      req.nextUrl.pathname === "/login")
   ) {
-    return NextResponse.redirect(new URL("/pedidos", req.url));
+    return NextResponse.redirect(new URL("/home", req.url));
   }
 }
 
