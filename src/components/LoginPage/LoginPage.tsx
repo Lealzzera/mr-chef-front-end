@@ -24,14 +24,20 @@ import InputFieldComponent from "../InputFieldComponent/InputFieldComponent";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import { useRouter } from "next/navigation";
 import login from "@/actions/login";
+import { useUserContext } from "@/context/userContext/userContext";
+import { setCookie } from "cookies-next";
+import { decodeToken } from "@/helpers/decodeToken";
 
 const LoginPage = () => {
+  const { handleChangeUserId } = useUserContext();
   const [userInputData, setUserInputData] = useState({
     email: "",
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const userContext = useUserContext();
+
   const route = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,18 +51,31 @@ const LoginPage = () => {
   const handleLogin = async () => {
     setErrorMessage("");
     setLoading(true);
-    const response = await login({
+    const { status, data } = await login({
       email: userInputData.email,
       password: userInputData.password,
     });
+
     setLoading(false);
 
-    if (response === 401) {
+    if (status === 401) {
       setErrorMessage("E-mail ou senha inválidos.");
     }
 
-    if (response === 201) {
-      route.push("/pedidos");
+    if (status === 201) {
+      const infosFromToken = await decodeToken(data.accessToken);
+      if (infosFromToken?.payload?.sub) {
+        const fifteenDays = 60 * 60 * 24 * 15;
+        handleChangeUserId(infosFromToken.payload.sub);
+        userContext.handleChangeUserId(infosFromToken.payload.sub);
+        setCookie("userId", infosFromToken.payload.sub, {
+          maxAge: fifteenDays,
+          path: "/",
+          sameSite: "lax",
+        });
+      }
+
+      route.push(`/home`);
     }
   };
 

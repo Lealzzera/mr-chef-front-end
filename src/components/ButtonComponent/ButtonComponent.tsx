@@ -7,7 +7,7 @@ interface ButtonComponentInterface extends ButtonProps {
   variant?: "contained" | "outlined" | "text";
   fullWidth?: boolean;
   loading?: boolean;
-  onClick?: () => void;
+  onClick?: (value?: any) => void;
 }
 
 const ButtonComponent = ({

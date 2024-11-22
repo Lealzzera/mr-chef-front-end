@@ -1,11 +1,12 @@
 "use client";
-import { useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useContext, useRef } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { menuList } from "@/mocks/menu";
 import { MenuContainer } from "./styles";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import useWindowLocation from "@/hooks/useWindowLocation";
 import logout from "@/actions/logout";
+import { useUserContext } from "@/context/userContext/userContext";
 
 type MenuComponentProps = {
   openMobileMenu?: boolean;
@@ -16,10 +17,12 @@ const MenuComponent = ({
   openMobileMenu,
   handleMobileMenu,
 }: MenuComponentProps) => {
-  const location = useWindowLocation();
+  const location = useWindowLocation().split("/");
+  const formattedLocation = `${location[location.length - 1]}`;
   const router = useRouter();
   const menuMobileRef = useRef<HTMLDivElement | null>(null);
   const buttonsList = useRef<HTMLUListElement>(null);
+  const { storeId } = useParams();
 
   const activeButtonStyle = (index: number) => {
     if (buttonsList.current) {
@@ -38,8 +41,11 @@ const MenuComponent = ({
     activeButtonStyle(indexButton);
     if (pageRouter === "/") {
       await logout();
+      router.push("/");
     }
-    router.push(pageRouter);
+    const builtRoute = `/store/${storeId}${pageRouter}`;
+    router.push(builtRoute);
+
     handleMobileMenu(false);
   };
 
@@ -58,7 +64,9 @@ const MenuComponent = ({
       <List ref={buttonsList}>
         {menuList.map(({ id, text, icon, routeUrl }, index) => (
           <ListItemButton
-            className={routeUrl === location ? "active" : ""}
+            className={
+              routeUrl.split("/")[1] === formattedLocation ? "active" : ""
+            }
             onClick={() => handlePushToRespectivePageButton(routeUrl, index)}
             key={id}
           >
